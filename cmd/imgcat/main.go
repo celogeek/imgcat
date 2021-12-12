@@ -66,5 +66,6 @@ func main() {
 
 	PrintHeader(resp.ContentLength, opts.height)
 	PrintImg(resp.Body)
+
 	PrintFooter()
 }
