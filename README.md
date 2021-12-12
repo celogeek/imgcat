@@ -24,7 +24,8 @@ go build ./cmd/imgcat
 ./imgcat -u "https://images.pexels.com/photos/2558605/pexels-photo-2558605.jpeg?cs=srgb&dl=pexels-anel-rossouw-2558605.jpg&fm=jpg" -r 25
 ```
 
-<img width="1069" alt="Capture d’écran 2021-12-11 à 17 40 55" src="https://user-images.githubusercontent.com/65178/145684510-39617c22-5818-4573-896c-7e0e6915db91.png">
+<img width="978" alt="Capture d’écran 2021-12-12 à 19 01 37" src="https://user-images.githubusercontent.com/65178/145723965-1a299d51-5cfb-42d4-b2b2-6fc97a715391.png">
+
 
 ## Help
 
