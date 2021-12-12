@@ -2,18 +2,19 @@ package main
 
 import (
 	"encoding/base64"
-	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/jessevdk/go-flags"
 )
 
 type Options struct {
-	url    string
-	height int
+	Url  string `short:"u" long:"url" description:"url of the jpg"`
+	Rows int    `short:"r" long:"rows" description:"maximum number of rows"`
 }
 
 func PrintHeader(size int64, height int) {
@@ -46,16 +47,16 @@ func PrintImg(img io.ReadCloser) {
 }
 
 func main() {
-	var opts = &Options{}
-	flag.StringVar(&opts.url, "url", "", "url of the jpg")
-	flag.IntVar(&opts.height, "height", 0, "maximum height in lines")
-	flag.Parse()
+	var options Options
+	if _, err := flags.Parse(&options); err != nil {
+		os.Exit(1)
+	}
 
-	if !(strings.HasPrefix(opts.url, "http://") || strings.HasPrefix(opts.url, "https://")) {
+	if !(strings.HasPrefix(options.Url, "http://") || strings.HasPrefix(options.Url, "https://")) {
 		log.Fatalln("url doesn't start with http")
 	}
 
-	resp, err := http.Get(opts.url)
+	resp, err := http.Get(options.Url)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -64,7 +65,7 @@ func main() {
 		log.Fatalln(fmt.Sprintf("Issue to get img, status = %d", resp.StatusCode))
 	}
 
-	PrintHeader(resp.ContentLength, opts.height)
+	PrintHeader(resp.ContentLength, options.Rows)
 	PrintImg(resp.Body)
 
 	PrintFooter()
