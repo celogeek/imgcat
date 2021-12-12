@@ -1,14 +1,11 @@
-SRC=./cmd
-BINARY=imgcat
-BINARY_SRC=$(SRC)/imgcat
-SOURCES=$(shell find $(BINARY_SRC) -name "*.go")
-
 .DEFAULT_GOAL := all
 
-$(BINARY): $(SOURCES)
-	go build $(BINARY_SRC)
+imgcat: main.go
+	go build -o $@
 
-all: $(BINARY) test
+build: imgcat
+
+all: build test
 
 test:
-	./$(BINARY) -u "https://images.pexels.com/photos/2558605/pexels-photo-2558605.jpeg?cs=srgb&dl=pexels-anel-rossouw-2558605.jpg&fm=jpg" -r 25
+	./imgcat -u "https://images.pexels.com/photos/2558605/pexels-photo-2558605.jpeg?cs=srgb&dl=pexels-anel-rossouw-2558605.jpg&fm=jpg" -r 25

@@ -15,7 +15,7 @@ make
 
 Or directly
 ```
-go build ./cmd/imgcat
+go build -o imgcat
 ```
 
 ## Usage
